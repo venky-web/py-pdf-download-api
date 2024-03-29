@@ -1,16 +1,43 @@
+# Use the official Python Alpine image as the base image
 FROM python:3.9-alpine3.13
 LABEL maintainer="venky-web"
 
+# Set environment variables for Python buffering
 ENV PYTHONUNBUFFERED 1
 
+# Copying requirements to the container
 COPY ./requirements.txt /tmp/requirements.txt
 COPY ./requirements.dev.txt /tmp/requirements.dev.txt
 # COPY ./scripts /scripts
 COPY ./app /app
 WORKDIR /app
+ARG DEV=false
+
+# Expose port 8000 to the outside world
 EXPOSE 8000
 
-ARG DEV=false
+# Install system dependencies for wkhtmltopdf
+RUN apk update && apk add --no-cache \
+    libxrender \
+    libfontconfig \
+    libx11-dev \
+    libjpeg-turbo-dev \
+    libxext \
+    ttf-dejavu \
+    ttf-droid \
+    ttf-freefont \
+    ttf-liberation \
+    ttf-ubuntu-font-family \
+    && rm -rf /var/cache/apk/*
+
+# Install wkhtmltopdf
+RUN apk add --no-cache --virtual .build-deps \
+    && wget -q -O /tmp/wkhtmltox.tar.xz "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.alpine-3.13_x86_64.tar.xz" \
+    && tar -xJf /tmp/wkhtmltox.tar.xz -C /tmp/ \
+    && mv /tmp/wkhtmltox/bin/wkhtmltopdf /usr/local/bin/wkhtmltopdf \
+    && rm -rf /tmp/* \
+    && apk del .build-deps
+
 RUN python -m venv /py && \
     /py/bin/pip install --upgrade pip && \
     apk add --update --no-cache postgresql-client jpeg-dev && \

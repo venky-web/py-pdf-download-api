@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from pdf_api.views import GeneratePDF
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('generate-pdf/', GeneratePDF.as_view(), name='generate_pdf'),
 ]
