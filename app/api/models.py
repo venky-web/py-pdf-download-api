@@ -35,11 +35,11 @@ class Report_Page(models.Model):
     page_name = models.CharField(max_length=100)
     page_order = models.IntegerField()
     status = models.CharField(max_length=20, blank=True)
-    definition = models.JSONField()
-    created_by = models.IntegerField()
-    created_dt = models.DateTimeField()
-    updated_by = models.IntegerField()
-    update_dt = models.DateTimeField()
+    definition = models.JSONField(null=True)
+    created_by = models.IntegerField(null=True)
+    created_dt = models.DateTimeField(null=True)
+    updated_by = models.IntegerField(null=True)
+    update_dt = models.DateTimeField(null=True)
 
     def __str__(self):
         return self.page_name
@@ -51,11 +51,11 @@ class Report_Feature_Page(models.Model):
     object_id = models.CharField(max_length=100)
     object_type = models.CharField(max_length=25)
     definition = models.JSONField()
-    created_by = models.IntegerField()
-    created_date = models.DateTimeField()
-    updated_by = models.IntegerField()
-    updated_date = models.DateTimeField()
-    container_id = models.IntegerField()
+    created_by = models.IntegerField(null=True)
+    created_date = models.DateTimeField(null=True)
+    updated_by = models.IntegerField(null=True)
+    updated_date = models.DateTimeField(null=True)
+    container_id = models.IntegerField(null=True)
 
     def __str__(self):
         return f"{self.object_type}_{self.object_id}"
@@ -77,11 +77,11 @@ class Widget(models.Model):
     widget_id = models.CharField(max_length=100, primary_key=True)
     widget_name = models.CharField(max_length=100)
     definition = models.JSONField()
-    created_date = models.DateTimeField()
-    updated_date = models.DateTimeField()
-    created_by = models.IntegerField()
-    updated_by = models.IntegerField()
-    container_id = models.IntegerField()
+    created_date = models.DateTimeField(null=True)
+    updated_date = models.DateTimeField(null=True)
+    created_by = models.IntegerField(null=True)
+    updated_by = models.IntegerField(null=True)
+    container_id = models.IntegerField(null=True)
     is_shared = models.CharField(max_length=2)
     is_deleted = models.CharField(max_length=2)
 

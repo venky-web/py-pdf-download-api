@@ -3,5 +3,7 @@ from api import views
 
 urlpatterns = [
     path('', views.getData),
-    path('delete', views.DeleteReports),
+    path('delete-reports', views.DeleteReports),
+    path('delete-pages', views.DeletePages),
+    path('delete-feature-pages', views.DeleteFeaturePages),
 ]

@@ -6,7 +6,7 @@ from django.http import HttpResponse
 import PyPDF2, io
 from PyPDF2 import PdfReader
 
-from api.models import Report
+from api import models
 
 path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
 
@@ -61,5 +61,15 @@ def getData(request):
 
 @api_view(['DELETE'])
 def DeleteReports(self):
-    Report.objects.all().delete()
+    models.Report.objects.all().delete()
+    return Response({'delete': 'successful'})
+
+@api_view(['DELETE'])
+def DeletePages(self):
+    models.Report_Page.objects.all().delete()
+    return Response({'delete': 'successful'})
+
+@api_view(['DELETE'])
+def DeleteFeaturePages(self):
+    models.Report_Feature_Page.objects.all().delete()
     return Response({'delete': 'successful'})

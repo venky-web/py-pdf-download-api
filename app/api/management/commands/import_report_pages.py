@@ -28,7 +28,6 @@ class Command(BaseCommand):
                     page_name = row['page_name'],
                     definition = row['definition'],
                     status = row['status'],
-                    is_deleted = row['is_deleted'],
                 )
                 try:
                     model_Instance.page_order = int(row['page_order'])
@@ -54,7 +53,7 @@ class Command(BaseCommand):
                 try:
                     model_Instance.update_dt = datetime.strptime(row['update_dt'], '%Y-%m-%d %H:%M:%S.%f')
                 except:
-                    print(f"Error: {row['report_name']} create by or update by error.")
+                    print(f"Error: {row['page_name']} create by or update by error.")
                 # Save the instance to the database
                 model_Instance.save()
 
