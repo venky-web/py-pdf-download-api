@@ -20,6 +20,7 @@ services:
       - DB_USER=devuser
       - DB_PASS=pass123
       - DEBUG=1
+      - WKHTMLTOPDF_PATH=/usr/local/bin/wkhtmltopdf
     # depends_on:
     #   - db
 

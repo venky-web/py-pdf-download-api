@@ -14,11 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
-from pdf_api.views import GeneratePDF
+from core.views import GeneratePDF
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('generate-pdf/', GeneratePDF.as_view(), name='generate_pdf'),
+    path('', include('api.urls')),
 ]
