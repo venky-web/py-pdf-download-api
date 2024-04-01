@@ -21,5 +21,5 @@ from core.views import GeneratePDF
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('generate-pdf/', GeneratePDF.as_view(), name='generate_pdf'),
-    path('', include('api.urls')),
+    path('api/', include('api.urls')),
 ]

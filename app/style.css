@@ -1,0 +1,20 @@
+.content-box {
+    width: 100%;
+    height: auto;
+    min-height: 100px;
+    background-color: bisque;
+    display: flex;
+    gap: 12px;
+}
+
+h1 {
+    color: blue;
+}
+
+.box {
+    background-color: #fff;
+    border-radius: 5px;
+    height: 150px;
+    display: inline-block;
+    width: ;
+}
